@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual Environment
+.venv/
+venv/
+env/
+
+# Data and Checkpoints
+data/
+*.pth
+*.pt
+checkpoints_resnet50_nas/
+
+# System / IDE
+.idea/
+.vscode/
+.agents/
+.gemini/

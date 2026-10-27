@@ -1,0 +1,146 @@
+{
+  "metadata": {
+    "mock_data": true,
+    "warning": "All measurements are invented for practice. They are not Raspberry Pi benchmarks.",
+    "device": "Raspberry Pi 4 Model B (assumed)",
+    "runtime": "ONNX Runtime CPU (assumed)",
+    "dataset": "CIFAR-10 (assumed)",
+    "batch_size": 1,
+    "teacher": "ResNet-18 (assumed)",
+    "training": "Student models assumed to use knowledge distillation"
+  },
+  "models": [
+    {
+      "model_id": "student-01",
+      "depth": 1,
+      "channels": [8],
+      "kernel": 3,
+      "accuracy_pct": 70.8,
+      "latency_ms": 8.2,
+      "energy_mj_per_image": 2.8,
+      "model_size_mb": 0.02,
+      "peak_ram_mb": 34.0
+    },
+    {
+      "model_id": "student-02",
+      "depth": 1,
+      "channels": [8],
+      "kernel": 5,
+      "accuracy_pct": 71.5,
+      "latency_ms": 9.1,
+      "energy_mj_per_image": 3.1,
+      "model_size_mb": 0.03,
+      "peak_ram_mb": 35.0
+    },
+    {
+      "model_id": "student-03",
+      "depth": 1,
+      "channels": [16],
+      "kernel": 3,
+      "accuracy_pct": 73.0,
+      "latency_ms": 10.1,
+      "energy_mj_per_image": 3.5,
+      "model_size_mb": 0.04,
+      "peak_ram_mb": 37.0
+    },
+    {
+      "model_id": "student-04",
+      "depth": 1,
+      "channels": [16],
+      "kernel": 5,
+      "accuracy_pct": 74.0,
+      "latency_ms": 11.5,
+      "energy_mj_per_image": 4.1,
+      "model_size_mb": 0.06,
+      "peak_ram_mb": 39.0
+    },
+    {
+      "model_id": "student-05",
+      "depth": 2,
+      "channels": [8, 16],
+      "kernel": 3,
+      "accuracy_pct": 78.2,
+      "latency_ms": 13.7,
+      "energy_mj_per_image": 5.2,
+      "model_size_mb": 0.11,
+      "peak_ram_mb": 45.0
+    },
+    {
+      "model_id": "student-06",
+      "depth": 2,
+      "channels": [8, 16],
+      "kernel": 5,
+      "accuracy_pct": 79.1,
+      "latency_ms": 16.2,
+      "energy_mj_per_image": 6.5,
+      "model_size_mb": 0.28,
+      "peak_ram_mb": 49.0
+    },
+    {
+      "model_id": "student-07",
+      "depth": 2,
+      "channels": [16, 32],
+      "kernel": 3,
+      "accuracy_pct": 82.4,
+      "latency_ms": 18.8,
+      "energy_mj_per_image": 7.8,
+      "model_size_mb": 0.48,
+      "peak_ram_mb": 57.0
+    },
+    {
+      "model_id": "student-08",
+      "depth": 2,
+      "channels": [16, 32],
+      "kernel": 5,
+      "accuracy_pct": 83.0,
+      "latency_ms": 23.5,
+      "energy_mj_per_image": 10.4,
+      "model_size_mb": 1.05,
+      "peak_ram_mb": 65.0
+    },
+    {
+      "model_id": "student-09",
+      "depth": 3,
+      "channels": [8, 16, 32],
+      "kernel": 3,
+      "accuracy_pct": 84.1,
+      "latency_ms": 22.4,
+      "energy_mj_per_image": 9.8,
+      "model_size_mb": 0.55,
+      "peak_ram_mb": 61.0
+    },
+    {
+      "model_id": "student-10",
+      "depth": 3,
+      "channels": [8, 16, 32],
+      "kernel": 5,
+      "accuracy_pct": 85.0,
+      "latency_ms": 29.9,
+      "energy_mj_per_image": 13.2,
+      "model_size_mb": 1.20,
+      "peak_ram_mb": 72.0
+    },
+    {
+      "model_id": "student-11",
+      "depth": 3,
+      "channels": [16, 32, 64],
+      "kernel": 3,
+      "accuracy_pct": 86.1,
+      "latency_ms": 31.5,
+      "energy_mj_per_image": 14.1,
+      "model_size_mb": 1.95,
+      "peak_ram_mb": 89.0
+    },
+    {
+      "model_id": "student-12",
+      "depth": 3,
+      "channels": [16, 32, 64],
+      "kernel": 5,
+      "accuracy_pct": 86.5,
+      "latency_ms": 42.0,
+      "energy_mj_per_image": 20.0,
+      "model_size_mb": 4.00,
+      "peak_ram_mb": 115.0
+    }
+  ]
+}

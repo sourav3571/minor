@@ -1,0 +1,27 @@
+# Glossary
+
+- **Architecture** — layer/block blueprint; distinct from its learned parameter values.
+- **Batch** — a group of examples processed together; tensors usually start with batch dimension `N`.
+- **Backpropagation** — chain-rule calculation of loss gradients through a computation graph.
+- **Channel** — image color plane or learned feature plane; grayscale has 1 input channel, RGB has 3.
+- **Checkpoint** — saved state (often parameters plus metadata) that allows a run to resume or reproduce a model.
+- **Convolution** — local weighted operation whose filter is reused across image positions; deep-learning libraries usually implement cross-correlation under this name.
+- **Cross-entropy (CE)** — classification loss comparing predicted class probabilities with target labels.
+- **Distillation** — training a student using both ground-truth targets and teacher outputs.
+- **Epoch** — one pass through the training examples.
+- **Feature map** — spatial output produced by a convolutional filter.
+- **FLOP / MAC** — floating-point operation / multiply-accumulate count; a theoretical workload proxy, not a direct timing measurement.
+- **Gradient** — derivative of a scalar objective with respect to parameters.
+- **Hard target** — ground-truth class ID or one-hot class target.
+- **Knowledge distillation (KD)** — teacher-student training; this book’s baseline uses output distributions.
+- **Latency** — elapsed time for an inference under a specified device, input, batch, and runtime protocol.
+- **Logit** — unnormalized model score before softmax.
+- **NAS** — neural architecture search; evaluating candidate blueprints under a search procedure.
+- **Pareto dominance** — one candidate is no worse in every objective and strictly better in at least one.
+- **Pareto frontier** — candidates not dominated by another candidate.
+- **Parameter** — learnable scalar in a model, usually a weight or bias.
+- **Soft target** — teacher’s probability distribution, often softened using temperature.
+- **Temperature** — positive scalar dividing logits before softmax; higher values produce a softer distribution.
+- **Tensor** — multidimensional numerical array with shape, dtype, and device.
+- **Throughput** — examples processed per unit time, often measured at a batch size greater than one.
+- **Validation set** — data used for model selection/settings, not gradient updates.
