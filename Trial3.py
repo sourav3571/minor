@@ -580,15 +580,19 @@ def execute_training_epoch(model: nn.Module, loader: DataLoader, optimizer: torc
             scaler.scale(loss).backward()
             scaler.unscale_(optimizer)
             torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=5.0)  # Prevents exploding gradients
+            scale_before = scaler.get_scale()
             scaler.step(optimizer)
             scaler.update()
+            scale_after = scaler.get_scale()
+            # Only step the scheduler if optimizer.step() was not skipped by GradScaler due to inf/nan
+            if scheduler is not None and (scale_before <= scale_after):
+                scheduler.step()
         else:
             loss.backward()
             torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=5.0)
             optimizer.step()
-
-        if scheduler is not None:
-            scheduler.step()
+            if scheduler is not None:
+                scheduler.step()
 
         total_loss += loss.item() * inputs.size(0)
         _, preds = s_logits.max(1)
