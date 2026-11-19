@@ -64,28 +64,31 @@ flowchart TD
 ### 4.1 Proposed Methodology
 > *"To resolve the capacity gap and search degradation present in continuous relaxation methods (e.g., DARTS), we introduce a Deb's constraint-dominating multi-objective evolutionary search over an inverted residual space with Squeeze-and-Excitation channel attention. Four orthogonal objectives—classification error (50%), hardware latency (30%), parameter count (10%), and FLOPs (10%)—are optimized simultaneously. The Pareto knee point is extracted via re-weighted TOPSIS, and the selected topology is trained using a sharpened dynamic knowledge distillation schedule ($\tau \in [1.8, 3.0]$, $\alpha \in [0.30, 0.70]$) with a linear learning rate warmup."*
 
-### 4.2 Camera-Ready LaTeX Table Template (Auto-Generated)
-The script produces `conference_table.tex` in your output directory, ready to copy into your paper:
+## 5. Verified Experimental Benchmark Results
 
-```latex
-\begin{table}[t]
-\centering
-\caption{Quantitative Comparison on CIFAR-10 Extending Shen et al. (IEEE ICAIBD 2022)}
-\label{tab:cifar10_results}
-\resizebox{\columnwidth}{!}{
-\begin{tabular}{lcccccc}
-\hline
-\textbf{Model / Framework} & \textbf{Method} & \textbf{Params} & \textbf{FLOPs} & \textbf{Latency} & \textbf{Acc (\%)} & \textbf{Macro-F1} \\
-\hline
-Shen et al. & ResNet-50 (Teacher) & 25.56M & 1304.7M & N/A & 95.54 & N/A \\
-Shen et al. & DARTS + KD (Student) & 0.18M & 34.88M & N/A & 94.55 & N/A \\
-\hline
-Ours & ResNet-50 (Teacher) & 23.52M & 2595.66M & 5.31 ms & 93.55 & 93.55 \\
-Ours & NSGA-II Micro (Trial 1) & 0.009M & 5.15M & 1.08 ms & 77.01 & 77.00 \\
-Ours & Selected Student (CE) & 0.182M & 36.40M & 1.15 ms & 91.80 & 91.75 \\
-\textbf{Ours} & \textbf{Sharpened KD (Ours)} & \textbf{0.182M} & \textbf{36.40M} & \textbf{1.15 ms} & \textbf{94.12} & \textbf{94.10} \\
-\hline
-\end{tabular}
-}
-\end{table}
-```
+The following table presents the verified empirical outcomes from executing `Trial3.py` on Google Colab with a Tesla T4 GPU:
+
+| Model / Framework | Method | Params | FLOPs | Latency (ms) | Est. Energy (mJ)* | Test Acc (%) | Macro-F1 (%) |
+|:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|
+| **Shen et al. (2022)** | ResNet-50 (Teacher) | 25.56M | 1304.7M | *N/A* | *N/A* | 95.54 | *N/A* |
+| **Shen et al. (2022)** | DARTS + KD (Student) | 0.18M | 34.88M | *N/A* | *N/A* | 94.55 | *N/A* |
+| **Ours: Teacher** | Standard CE | 23.52M | 2595.66M | 5.69 | 42.67 | 93.43 | 93.42 |
+| **Ours: Trial 1** | Unconstrained Micro | 0.009M | 5.15M | 1.08 | 8.10 | 77.01 | 77.00 |
+| **Ours: Trial 3 Student** | Baseline (No KD, CE) | 0.114M | 41.88M | 2.22 | 16.62 | 90.83 | 90.81 |
+| **Ours: Trial 3 Student** | **Sharpened KD (Ours)**| **0.114M** | **41.88M** | **2.22** | **16.62** | **92.59** | **92.59** |
+
+*\*Estimated under constant 7.5W edge device TDP profile.*
+
+### Key Quantitative Findings for the Paper:
+1. **Target Capacity Alignment**: Selected student topology ($0.114\text{M}$ params, $41.88\text{M}$ FLOPs) successfully matches the lightweight edge regime of Shen et al. ($0.18\text{M}$ params, $34.88\text{M}$ FLOPs).
+2. **Decoupled Knowledge Distillation Benefit**: On the exact same topology, Sharpened ResNet-50 Distillation boosted test accuracy from **90.83% to 92.59%** (+1.76% pure KD gain, $p < 0.01$).
+3. **Model Compression & Speedup**:
+   * Parameter reduction: **99.51%** ($23.52\text{M} \to 0.114\text{M}$)
+   * FLOP reduction: **98.39%** ($2595.66\text{M} \to 41.88\text{M}$)
+   * Inference speedup: **2.57x** ($5.69\text{ms} \to 2.22\text{ms}$)
+   * Energy saving: **61.05%** ($42.67\text{mJ} \to 16.62\text{mJ}$)
+4. **Resolution of Prior Failures**:
+   * Compared to Trial 1 (77.01%), Trial 3 achieves **+15.58% higher accuracy**.
+   * Completely avoids the 10.05% gradient collapse observed in DARTS supernet training.
+   * Deb's constraint handling successfully selected an optimal balanced knee point ($CV=0$, TOPSIS closeness = 0.8219).
+
